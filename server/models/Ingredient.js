@@ -1,9 +1,8 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-let Comment = new Schema(
+let Ingredient = new Schema(
   {
-    calorie: { type: Number },
     recipe: { type: Schema.Types.ObjectId, ref: "recipe" },
     name: {type: String, required: true },
     quantity: {type: Number, required: false }
@@ -12,4 +11,4 @@ let Comment = new Schema(
     timestamps: true, // This will add createdAt and updatedAt fields automatically
   }
 );
-export default mongoose.model( "ingredients", Ingrideient );
+export default mongoose.model( "ingredients", Ingredient );
