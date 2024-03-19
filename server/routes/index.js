@@ -1,9 +1,11 @@
-import React from 'react'
+// import { Router } from "express";
+// import usersRoutes from "./users.js";
 
-function index() {
-  return (
-    <div>index</div>
-  )
-}
+// const router = Router();
 
-export default index
+// router.get("/", (req, res) => res.send("This is the api root!"));
+
+// router.use("/", usersRoutes);
+
+
+// export default router;
