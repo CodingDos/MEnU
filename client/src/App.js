@@ -1,5 +1,5 @@
 import Nav from './components/Nav.jsx';
-import Home from './screens/Home.jsx';
+import Home from './screens/RegisterLoginPage.jsx';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
