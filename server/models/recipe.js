@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Ingredient from '../models/ingredient.js'
+import Ingredient from './ingredient.js'
 
 const Schema = mongoose.Schema;
 
