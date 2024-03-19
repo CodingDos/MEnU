@@ -33,7 +33,7 @@ function RegisterLoginPage() {
             <input type="submit" value="Register" class="btn btn-light mt-3"/>
         </form>
         
-        <form action= "index.html" method="POST" class="col-3 p-3">
+        <form action= "/home" method="POST" class="col-3 p-3">
             <h2 class="text">Login</h2>
             <div class="form-group">
                 <label for="email">Email:</label>
