@@ -6,8 +6,7 @@ let Comment = new Schema(
   {
     recipe: { type: Schema.Types.ObjectId, ref: "recipe" },
     userId: { type: Schema.Types.ObjectId, ref: "users" },
-    title: { type: String, unique: true },
-    comment: { type: String, unique: true },
+    comment: { type: String, unique: false },
   },
   {
     timestamps: true, // This will add createdAt and updatedAt fields automatically
