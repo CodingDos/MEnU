@@ -8,8 +8,8 @@ dotenv.config();
 export const registerUser = async (req, res) => {
   console.log(req.body)
   try {
-    const { username, email, password, firstName, lastName, description} = req.body
-    console.log(password.length);
+    const { username, email, password, firstName, lastName, description, img} = req.body
+    // console.log(password.length);
     const existingUser = await User.findOne({ username })
     if(existingUser) {
       return res.status(400).json({ error: "Username already exist"})
@@ -27,7 +27,8 @@ export const registerUser = async (req, res) => {
       password_digest,
       firstName,
       lastName,
-      description
+      description,
+      img
     })
 
     await newUser.save()
@@ -38,7 +39,8 @@ export const registerUser = async (req, res) => {
       email: newUser.email,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
-      description: newUser.description
+      description: newUser.description,
+      img: newUser.img
     }
 
     const token = jwt.sign(payload, process.env.TOKEN_KEY);
@@ -69,7 +71,8 @@ export const login = async (req, res) => {
       email: newUser.email,
       firstName: newUser.firstName,
       lastName: newUser.lastName,
-      description: newUser.description
+      description: newUser.description,
+      img: newUser.img
       }
       const token = jwt.sign(payload, process.env.TOKEN_KEY)
 
@@ -97,5 +100,26 @@ export const verify = async (req, res) => {
     res.status(401).send("Not Authorized");
   }
 };
+
+export const editUser = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1]
+    if(!token){
+      return res.status(401).json({error: "Authorization token not provided"})
+    }
+    const decoded = jwt.verify(token, process.env.TOKEN_KEY)
+    const userId = decoded.id
+
+    //will need to compare userId from token with "user" in the frontend.
+
+    const { id } = req.params
+    const user = await User.findByIdAndUpdate( id, req.body, {new: true})
+    console.log(user)
+    res.status(201).json(user)
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+}
 
 

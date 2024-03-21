@@ -54,7 +54,7 @@ export const editComment = async (req, res) => {
         //  THIS IS FRONT END LOGIC !potentially need to compare userid with comment id | need to make sure only comments made by the user can be edited.
         // if (comment.userId === userId) {
 
-            const userComment = await Comment.findByIdAndUpdate(id, req.body, { new: true, })
+            const userComment = await Comment.findByIdAndUpdate(id, req.body, { new: true })
             console.log(userComment)
             res.status(201).json(userComment)
         // }

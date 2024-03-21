@@ -8,7 +8,8 @@ const User = new Schema(
     password_digest: { type: String, required: true, select: false },
     firstName:{type: String},
     lastName:{type: String},
-    description: {type: String}
+    description: {type: String},
+    img: {type: String}
   },
   { timestamps: true }
 );
