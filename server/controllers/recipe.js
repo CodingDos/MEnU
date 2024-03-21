@@ -1,5 +1,6 @@
 import jwt  from "jsonwebtoken";
-import Recipe from "../models/recipe";
+import Recipe from "../models/recipe.js";
+// import Ingredient from "../models/Ingredient.js";
 
 
 // For our public feed to show all recipes of any user
@@ -20,7 +21,7 @@ export const getAllRecipes = async (req, res) => {
 export const getRecipe = async (req, res) => {
     try {
         const { id } = req.params;
-        const recipe = Recipe.findById(id);
+        const recipe = await Recipe.findById(id);
         res.status(200).json(recipe);
     } catch (error) {
         console.error(error);

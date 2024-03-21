@@ -10,10 +10,7 @@ const Recipe = new Schema(
     image: { type: String, required: true },
     calories:{type: String, required: false },
     userId: { type: Schema.Types.ObjectId, ref: "users" }, //double check with team
-    ingredients:
-      [{
-        Ingredient
-      }],
+    ingredients: [Ingredient.schema]
   },
   { timestamps: true }
 );

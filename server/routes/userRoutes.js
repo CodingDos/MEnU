@@ -10,8 +10,7 @@ router.get("/verify", controllers.verify); //will verify user with their unique 
 // router.post("/change-password", controllers.changePassword); //Will allow user to change their password
 
 
-// Get all Recipes under one user - For the profile page.
-router.get("/", controllers.getUserRecipes);
+
 
 
 export default router;

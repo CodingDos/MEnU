@@ -3,7 +3,7 @@ import db from "./db/connections.js";
 import cors from "cors";
 import logger from "morgan";
 import chalk from "chalk";
-// import dotenv from "dotenv";
+import dotenv from "dotenv";
 import allRoutes from "./routes/index.js";
 
 dotenv.config();

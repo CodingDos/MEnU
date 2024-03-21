@@ -1,17 +1,20 @@
 import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
+import dotenv from "dotenv";
 
+dotenv.config();
 
 export const registerUser = async (req, res) => {
+  console.log(req.body)
   try {
-    const { username, email, password, firstname, lastname, description} = req.body
-
+    const { username, email, password, firstName, lastName, description} = req.body
+    console.log(password.length);
     const existingUser = await User.findOne({ username })
     if(existingUser) {
       return res.status(400).json({ error: "Username already exist"})
     } 
-    if (password.length < 6 || password.length > 15) {
+    if (password.length < 6) {
       return res
         .status(400)
         .json({ error: "Password must be between 6 and 15 characters." });
@@ -22,8 +25,8 @@ export const registerUser = async (req, res) => {
       username,
       email,
       password_digest,
-      firstname,
-      lastname,
+      firstName,
+      lastName,
       description
     })
 
@@ -33,13 +36,13 @@ export const registerUser = async (req, res) => {
       id: newUser._id,
       username: newUser.username,
       email: newUser.email,
-      firstname: newUser.firstname,
-      lastname: newUser.lastname,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       description: newUser.description
     }
 
     const token = jwt.sign(payload, process.env.TOKEN_KEY);
-    res.status(400).json({ token })
+    res.status(201).json({ token })
   } catch (error) {
     console.log(error.message);
     res.status(400).json({ error: error.message });
@@ -64,8 +67,8 @@ export const login = async (req, res) => {
       id: newUser._id,
       username: newUser.username,
       email: newUser.email,
-      firstname: newUser.firstname,
-      lastname: newUser.lastname,
+      firstName: newUser.firstName,
+      lastName: newUser.lastName,
       description: newUser.description
       }
       const token = jwt.sign(payload, process.env.TOKEN_KEY)

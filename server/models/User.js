@@ -3,11 +3,11 @@ const Schema = mongoose.Schema;
 
 const User = new Schema(
   {
-    username: {type: String, required: true},
-    email: { type: String, required: true },
+    username: {type: String},
+    email: { type: String},
     password_digest: { type: String, required: true, select: false },
-    firstName:{type: String, required: true },
-    lastName:{type: String, required: true },
+    firstName:{type: String},
+    lastName:{type: String},
     description: {type: String}
   },
   { timestamps: true }
