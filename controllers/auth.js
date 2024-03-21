@@ -5,6 +5,16 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+export const getUsers = async (req, res) => {
+  try {
+    const users = User.find()
+    res.json(users)
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: error.message });
+  }
+}
+
 export const registerUser = async (req, res) => {
   console.log(req.body)
   try {
