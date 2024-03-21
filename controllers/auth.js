@@ -7,7 +7,7 @@ dotenv.config();
 
 export const getUsers = async (req, res) => {
   try {
-    const users = User.find()
+    const users = await User.find()
     res.json(users)
   } catch (error) {
     console.log(error.message);
