@@ -25,7 +25,8 @@ export const createComment = async (req, res) => {
         const userId = decoded.id;
 
         const { recipeId } = req.params
-        const newComment = new Comment({ ...req.body, recipeId, userId })
+        console.log(recipeId, 'szdjfhdjkfhdohgkjfjligkfjthdtjkilugkyfjhtdtfjkulhilgkfjdhfj;ouhigufjhx')
+        const newComment = new Comment({ ...req.body, recipeId: recipeId, userId: userId })
         await newComment.save()
         res.status(201).json(newComment)
     } catch (error) {
@@ -50,12 +51,13 @@ export const editComment = async (req, res) => {
         const comment = await Comment.findById(id) //try with userId
 
         
-        //  potentially need to compare userid with comment id | need to make sure only comments made by the user can be edited.
-        if (comment.userId === userId) {
+        //  THIS IS FRONT END LOGIC !potentially need to compare userid with comment id | need to make sure only comments made by the user can be edited.
+        // if (comment.userId === userId) {
 
             const userComment = await Comment.findByIdAndUpdate(id, req.body, { new: true, })
+            console.log(userComment)
             res.status(201).json(userComment)
-        }
+        // }
 
     } catch (error) {
         console.error(error);
@@ -77,13 +79,13 @@ export const deleteComment = async (req, res) => {
         const { id } = req.params
         const comment = await Comment.findById(id)
 
-        if (comment.userId === userId){
+        // if (comment.userId === userId){
             const deleted = await Comment.findByIdAndDelete(id)
             if (deleted) {
                 return res.status(200).send("Comment deleted");
               }
               throw new Error("Comment not found");
-        }
+        // }
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: error.message });   
