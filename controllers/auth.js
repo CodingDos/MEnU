@@ -2,6 +2,7 @@ import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv";
+import { UpdateModeEnum } from "chart.js";
 
 dotenv.config();
 
@@ -124,8 +125,13 @@ export const editUser = async (req, res) => {
 
     const { id } = req.params
     const user = await User.findByIdAndUpdate( id, req.body, {new: true})
-    console.log(user)
-    res.status(201).json(user)
+    const updateToken = jwt.sign({
+      username: user.username,
+      email: user.email,
+      description: user.description,
+      img: user.img
+    }, process.env.TOKEN_KEY)
+    res.status(200).json({user: user, token: updateToken})
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
