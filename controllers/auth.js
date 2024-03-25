@@ -2,7 +2,7 @@ import User from "../models/User.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import dotenv from "dotenv";
-import { UpdateModeEnum } from "chart.js";
+
 
 dotenv.config();
 
@@ -17,8 +17,8 @@ export const getUsers = async (req, res) => {
 }
 
 export const getUser = async (req, res) => {
-  const { id } = req.params
   try {
+    const { id } = req.params;
     const user = await User.findById(id)
     res.json(user)
   } catch (error) {
