@@ -16,6 +16,17 @@ export const getUsers = async (req, res) => {
   }
 }
 
+export const getUser = async (req, res) => {
+  const { id } = req.params
+  try {
+    const user = await User.findById(id)
+    res.json(user)
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ error: error.message });
+  }
+}
+
 export const registerUser = async (req, res) => {
   console.log(req.body)
   try {
@@ -125,13 +136,14 @@ export const editUser = async (req, res) => {
 
     const { id } = req.params
     const user = await User.findByIdAndUpdate( id, req.body, {new: true})
-    const updateToken = jwt.sign({
-      username: user.username,
-      email: user.email,
-      description: user.description,
-      img: user.img
-    }, process.env.TOKEN_KEY)
-    res.status(200).json({user: user, token: updateToken})
+    //
+    // const updateToken = jwt.sign({
+    //   username: user.username,
+    //   email: user.email,
+    //   description: user.description,
+    //   img: user.img
+    // }, process.env.TOKEN_KEY)
+    res.status(200).json(user)
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error.message });
